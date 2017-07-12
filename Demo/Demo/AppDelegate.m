@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import <PPNetworkHelper.h>
+#import <AVFoundation/AVFoundation.h>
+#import "SWAudioPlayer.h"
+
 
 @interface AppDelegate ()
 
@@ -21,6 +24,8 @@
     
     // 实时监测网络状态
     [self monitorNetworkStatus];
+    
+    [self audioPlayInBackground];
     
     return YES;
 }
@@ -50,6 +55,15 @@
     
 }
 
+// 设置音频在后台及静音模式下播放
+- (void)audioPlayInBackground {
+    // 获取音频的会话
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    // 设置后台播放类型
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    // 激活会话
+    [session setActive:YES error:nil];
+}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

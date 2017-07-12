@@ -12,7 +12,6 @@
 
 + (instancetype)player;
 
-
 // 根据url播放音频
 - (void)playWithURL:(NSURL *)url;
 
