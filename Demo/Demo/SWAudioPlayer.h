@@ -21,8 +21,8 @@
 // 暂停
 - (void)pause;
 
-// 改变播放进度
-- (void)seekToTime:(NSInteger)time;
+// 设置音频在后台及静音模式下播放
++ (void)audioPlayInBackground;
 
 
 @end

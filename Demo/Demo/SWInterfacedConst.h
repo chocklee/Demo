@@ -22,5 +22,5 @@
 UIKIT_EXTERN NSString *const kApiPrefix;
 
 #pragma mark - 登录
-/** 登录*/
+// 登录
 UIKIT_EXTERN NSString *const kLogin;

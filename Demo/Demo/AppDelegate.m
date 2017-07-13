@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <PPNetworkHelper.h>
-#import <AVFoundation/AVFoundation.h>
+#import "SWNetworkStatus.h"
 #import "SWAudioPlayer.h"
 
 
@@ -23,46 +22,12 @@
     // Override point for customization after application launch.
     
     // 实时监测网络状态
-    [self monitorNetworkStatus];
+    [SWNetworkStatus monitorNetworkStatus];
     
-    [self audioPlayInBackground];
+    // 设置音频在后台及静音模式下播放
+    [SWAudioPlayer audioPlayInBackground];
     
     return YES;
-}
-
-- (void)monitorNetworkStatus {
-    // 网络状态改变一次, networkStatusWithBlock就会响应一次
-    [PPNetworkHelper networkStatusWithBlock:^(PPNetworkStatusType networkStatus) {
-        
-        switch (networkStatus) {
-                // 未知网络
-            case PPNetworkStatusUnknown:
-                // 无网络
-            case PPNetworkStatusNotReachable:
-                NSLog(@"无网络");
-                break;
-                // 手机网络
-            case PPNetworkStatusReachableViaWWAN:
-                NSLog(@"手机网络");
-                break;
-                // 无线网络
-            case PPNetworkStatusReachableViaWiFi:
-                NSLog(@"无线网络");
-                break;
-        }
-        
-    }];
-    
-}
-
-// 设置音频在后台及静音模式下播放
-- (void)audioPlayInBackground {
-    // 获取音频的会话
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    // 设置后台播放类型
-    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-    // 激活会话
-    [session setActive:YES error:nil];
 }
 
 

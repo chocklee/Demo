@@ -19,6 +19,9 @@
 		E3484F5A1F15EC8000EB0E08 /* SWHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E3484F591F15EC8000EB0E08 /* SWHTTPRequest.m */; };
 		E3484F5D1F160EFC00EB0E08 /* SWAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E3484F5C1F160EFC00EB0E08 /* SWAudioPlayer.m */; };
 		E3484F611F1617CF00EB0E08 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E3484F601F1617CF00EB0E08 /* music.mp3 */; };
+		E3484F631F17040200EB0E08 /* u40.png in Resources */ = {isa = PBXBuildFile; fileRef = E3484F621F17040200EB0E08 /* u40.png */; };
+		E348501A1F1750DA00EB0E08 /* SWNetworkStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E34850191F1750DA00EB0E08 /* SWNetworkStatus.m */; };
+		E34850201F1761D500EB0E08 /* SWAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = E348501F1F1761D500EB0E08 /* SWAudioRecorder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,11 @@
 		E3484F5B1F160EFC00EB0E08 /* SWAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAudioPlayer.h; sourceTree = "<group>"; };
 		E3484F5C1F160EFC00EB0E08 /* SWAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAudioPlayer.m; sourceTree = "<group>"; };
 		E3484F601F1617CF00EB0E08 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		E3484F621F17040200EB0E08 /* u40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = u40.png; sourceTree = "<group>"; };
+		E34850181F1750DA00EB0E08 /* SWNetworkStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWNetworkStatus.h; sourceTree = "<group>"; };
+		E34850191F1750DA00EB0E08 /* SWNetworkStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWNetworkStatus.m; sourceTree = "<group>"; };
+		E348501E1F1761D500EB0E08 /* SWAudioRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAudioRecorder.h; sourceTree = "<group>"; };
+		E348501F1F1761D500EB0E08 /* SWAudioRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAudioRecorder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,10 +99,6 @@
 				E3484F391F15BD8C00EB0E08 /* AppDelegate.m */,
 				E3484F3B1F15BD8C00EB0E08 /* ViewController.h */,
 				E3484F3C1F15BD8C00EB0E08 /* ViewController.m */,
-				E3484F3E1F15BD8C00EB0E08 /* Main.storyboard */,
-				E3484F411F15BD8C00EB0E08 /* Assets.xcassets */,
-				E3484F431F15BD8C00EB0E08 /* LaunchScreen.storyboard */,
-				E3484F461F15BD8C00EB0E08 /* Info.plist */,
 				E3484F351F15BD8C00EB0E08 /* Supporting Files */,
 				E3484F4C1F15CC9A00EB0E08 /* SWPinyinRichText.h */,
 				E3484F4D1F15CC9A00EB0E08 /* SWPinyinRichText.m */,
@@ -104,7 +108,12 @@
 				E3484F591F15EC8000EB0E08 /* SWHTTPRequest.m */,
 				E3484F5B1F160EFC00EB0E08 /* SWAudioPlayer.h */,
 				E3484F5C1F160EFC00EB0E08 /* SWAudioPlayer.m */,
+				E34850181F1750DA00EB0E08 /* SWNetworkStatus.h */,
+				E34850191F1750DA00EB0E08 /* SWNetworkStatus.m */,
+				E348501E1F1761D500EB0E08 /* SWAudioRecorder.h */,
+				E348501F1F1761D500EB0E08 /* SWAudioRecorder.m */,
 				E3484F601F1617CF00EB0E08 /* music.mp3 */,
+				E3484F621F17040200EB0E08 /* u40.png */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -112,6 +121,10 @@
 		E3484F351F15BD8C00EB0E08 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E3484F3E1F15BD8C00EB0E08 /* Main.storyboard */,
+				E3484F411F15BD8C00EB0E08 /* Assets.xcassets */,
+				E3484F431F15BD8C00EB0E08 /* LaunchScreen.storyboard */,
+				E3484F461F15BD8C00EB0E08 /* Info.plist */,
 				E3484F361F15BD8C00EB0E08 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -160,7 +173,7 @@
 				TargetAttributes = {
 					E3484F311F15BD8C00EB0E08 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = WDDBSC2C6T;
+						DevelopmentTeam = LQ39P5TB68;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -194,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3484F611F1617CF00EB0E08 /* music.mp3 in Resources */,
+				E3484F631F17040200EB0E08 /* u40.png in Resources */,
 				E3484F451F15BD8C00EB0E08 /* LaunchScreen.storyboard in Resources */,
 				E3484F421F15BD8C00EB0E08 /* Assets.xcassets in Resources */,
 				E3484F401F15BD8C00EB0E08 /* Main.storyboard in Resources */,
@@ -259,7 +273,9 @@
 				E3484F3A1F15BD8C00EB0E08 /* AppDelegate.m in Sources */,
 				E3484F571F15EB2600EB0E08 /* SWInterfacedConst.m in Sources */,
 				E3484F371F15BD8C00EB0E08 /* main.m in Sources */,
+				E348501A1F1750DA00EB0E08 /* SWNetworkStatus.m in Sources */,
 				E3484F5D1F160EFC00EB0E08 /* SWAudioPlayer.m in Sources */,
+				E34850201F1761D500EB0E08 /* SWAudioRecorder.m in Sources */,
 				E3484F4E1F15CC9A00EB0E08 /* SWPinyinRichText.m in Sources */,
 				E3484F5A1F15EC8000EB0E08 /* SWHTTPRequest.m in Sources */,
 			);
@@ -382,7 +398,7 @@
 			baseConfigurationReference = DEC9868145386CE343DBB5CB /* Pods-Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = WDDBSC2C6T;
+				DEVELOPMENT_TEAM = LQ39P5TB68;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayutime.Demo;
@@ -395,7 +411,7 @@
 			baseConfigurationReference = 3579393FBAF62A4DEE1600F0 /* Pods-Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = WDDBSC2C6T;
+				DEVELOPMENT_TEAM = LQ39P5TB68;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayutime.Demo;

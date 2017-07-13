@@ -10,7 +10,7 @@
 
 #if DevelopSever
 // 接口前缀-开发服务器
-NSString *const kApiPrefix = @"http://attendancesystem.leanapp.cn/";
+NSString *const kApiPrefix = @"";
 
 #elif TestSever
 // 接口前缀-测试服务器
@@ -23,4 +23,4 @@ NSString *const kApiPrefix = @"";
 #endif
 
 #pragma mark - 登录
-NSString *const kLogin = @"api/user/login";
+NSString *const kLogin = @"";

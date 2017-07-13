@@ -12,6 +12,7 @@
 #import "SWHTTPRequest.h"
 #import <PPNetworkHelper.h>
 #import "SWAudioPlayer.h"
+#import "SWNetworkStatus.h"
 
 @interface ViewController ()
 
@@ -39,32 +40,10 @@
     // 清理缓存
     //    [PPNetworkCache removeAllHttpCache];
     
-//    NSDictionary *params = @{@"account":@"teacher05@anhui", @"password":@"123456"};
-//    [SWHTTPRequest getLoginWithParameters:params success:^(NSDictionary *response) {
-//        NSLog(@"%@", response);
-//    } failure:^(NSError *error) {
-//        NSLog(@"%@",error);
-//    }];
-    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self getCurrentNetworkStatus];
-//    });
+    [SWNetworkStatus getCurrentNetworkStatus];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"music" ofType:@"mp3"];
     [[SWAudioPlayer player] playWithURL:[NSURL fileURLWithPath:path]];
-}
-
-#pragma mark - 一次性获取当前最新网络状态
-- (void)getCurrentNetworkStatus {
-    if (kIsNetwork) {
-        if (kIsWWANNetwork) {
-            NSLog(@"手机网络");
-        } else if (kIsWiFiNetwork){
-            NSLog(@"WiFi网络");
-        }
-    } else {
-        NSLog(@"无网络");
-    }
 }
 
 

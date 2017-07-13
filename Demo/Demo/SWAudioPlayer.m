@@ -15,8 +15,7 @@
 
 @property (nonatomic, strong) AVPlayer *player;
 
-//播放状态
-@property (nonatomic,assign) BOOL isPlay;
+@property (nonatomic, assign) BOOL isPlay;
 
 @end
 
@@ -38,6 +37,7 @@
     AVPlayerItem *currentItem = [[AVPlayerItem alloc] initWithURL:url];
     [self.player replaceCurrentItemWithPlayerItem:currentItem];
     [self play];
+    [self updatelockScreenInfo];
 }
 
 //播放
@@ -52,20 +52,14 @@
     self.isPlay = NO;
 }
 
-//改变播放进度
-- (void)seekToTime:(NSInteger)time {
-    //如果是播放状态
-    if (self.isPlay) {
-        //先暂停当前歌曲
-        [self pause];
-        //改变播放进度
-        [self.player seekToTime:CMTimeMake(time * self.player.currentTime.timescale, self.player.currentTime.timescale)];
-        //继续播放
-        [self play];
-    } else {
-        //改变播放进度
-        [self.player seekToTime:CMTimeMake(time * self.player.currentTime.timescale, self.player.currentTime.timescale)];
-    }
+// 设置音频在后台及静音模式下播放
++ (void)audioPlayInBackground {
+    // 获取音频的会话
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    // 设置后台播放类型
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    // 激活会话
+    [session setActive:YES error:nil];
 }
 
 #pragma mark - private method
@@ -74,15 +68,14 @@
     // 直接使用sharedCommandCenter来获取MPRemoteCommandCenter的shared实例
     MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
     
-    // 启用播放命令 (锁屏界面和上拉快捷功能菜单处的播放按钮触发的命令)
-    commandCenter.playCommand.enabled = YES;
-    // 为播放命令添加响应事件, 在点击后触发
-    [commandCenter.playCommand addTarget:self action:@selector(playAction:)];
-    
     // 播放, 暂停, 上下曲的命令默认都是启用状态, 即enabled默认为YES
-    // 为暂停, 上一曲, 下一曲分别添加对应的响应事件
+    // 播放
+    [commandCenter.playCommand addTarget:self action:@selector(playAction:)];
+    // 暂停
     [commandCenter.pauseCommand addTarget:self action:@selector(pauseAction:)];
+    // 上一曲
     [commandCenter.previousTrackCommand addTarget:self action:@selector(previousTrackAction:)];
+    // 下一曲
     [commandCenter.nextTrackCommand addTarget:self action:@selector(nextTrackAction:)];
     
     // 启用耳机的播放/暂停命令 (耳机上的播放按钮触发的命令)
@@ -108,7 +101,11 @@
 }
 
 - (void)playOrPauseAction:(MPRemoteCommandCenter *)sender {
-    
+    if (self.isPlay) {
+        [self pause];
+    } else {
+        [self play];
+    }
 }
 
 
@@ -117,28 +114,25 @@
     MPNowPlayingInfoCenter *infoCenter = [MPNowPlayingInfoCenter defaultCenter];
     
     // MPMediaItemArtwork 用来表示锁屏界面图片的类型
-    //    MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+    // 海报图片
+    UIImage *posterImage = [UIImage imageNamed:@"u40"];
+    UIImageView *wordCardView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 328, 328)];
+    wordCardView.image = posterImage;
+    wordCardView.contentMode = UIViewContentModeScaleAspectFill;
+    // 获取添加了词卡的海报图片
+    
+    UIGraphicsBeginImageContextWithOptions(wordCardView.frame.size, NO, 1);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [wordCardView.layer renderInContext:context];
+    posterImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:posterImage];
     
     // 通过配置nowPlayingInfo的值来更新锁屏界面的信息
-    infoCenter.nowPlayingInfo = @{
-                                  // 歌曲名
-                                  MPMediaItemPropertyTitle : @"西红柿",
-                                  // 艺术家名
-                                  MPMediaItemPropertyArtist : @"Integrated Chinese: Level 2, Part 1",
-                                  // 专辑名字
-                                  //                                  MPMediaItemPropertyAlbumTitle : music.album,
-                                  // 歌曲总时长
-                                  //                                  MPMediaItemPropertyPlaybackDuration : @(duration),
-                                  // 歌曲的当前时间
-                                  //                                  MPNowPlayingInfoPropertyElapsedPlaybackTime : @(currentTime),
-                                  // 歌曲的插图, 类型是MPMeidaItemArtwork对象
-                                  //                                  MPMediaItemPropertyArtwork : artwork,
-                                  
-                                  // 无效的, 歌词的展示是通过图片绘制完成的, 即将歌词绘制到歌曲插图, 通过更新插图来实现歌词的更新的
-                                  // MPMediaItemPropertyLyrics : lyric.content,
-                                  };
+    infoCenter.nowPlayingInfo = @{MPMediaItemPropertyTitle : @"歌曲名", MPMediaItemPropertyArtist : @"艺术家名", MPMediaItemPropertyAlbumTitle : @"专辑名字", MPMediaItemPropertyArtwork : artwork};
+    // MPMediaItemPropertyPlaybackDuration - 歌曲时长
+    // MPNowPlayingInfoPropertyElapsedPlaybackTime - 已经播放时长
 }
-
 
 #pragma mark - lazy
 - (AVPlayer *)player {
