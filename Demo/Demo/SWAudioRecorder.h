@@ -8,7 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol SWAudioRecorderDelegate <NSObject>
+
+@optional
+- (void)getCurrentRecorderSecond:(NSUInteger)second;
+
+@end
+
 @interface SWAudioRecorder : NSObject
+
+@property (nonatomic, weak) id<SWAudioRecorderDelegate> delegate;
 
 // 开始录音
 - (void)startRecord;

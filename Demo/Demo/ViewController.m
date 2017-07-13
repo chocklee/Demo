@@ -13,8 +13,11 @@
 #import <PPNetworkHelper.h>
 #import "SWAudioPlayer.h"
 #import "SWNetworkStatus.h"
+#import "SWAudioRecorder.h"
 
-@interface ViewController ()
+@interface ViewController () <SWAudioRecorderDelegate>
+
+@property (nonatomic, strong) SWAudioRecorder *recorder;
 
 @end
 
@@ -40,12 +43,30 @@
     // 清理缓存
     //    [PPNetworkCache removeAllHttpCache];
     
-    [SWNetworkStatus getCurrentNetworkStatus];
+//    [SWNetworkStatus getCurrentNetworkStatus];
+//    
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"music" ofType:@"mp3"];
+//    [[SWAudioPlayer player] playWithURL:[NSURL fileURLWithPath:path]];
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"music" ofType:@"mp3"];
-    [[SWAudioPlayer player] playWithURL:[NSURL fileURLWithPath:path]];
+    self.recorder = [[SWAudioRecorder alloc] init];
+    self.recorder.delegate = self;
 }
 
+- (void)getCurrentRecorderSecond:(NSUInteger)second {
+    NSLog(@"%lu", second);
+}
+
+- (IBAction)startRecord:(id)sender {
+    [self.recorder startRecord];
+}
+
+- (IBAction)stopRecord:(id)sender {
+    [self.recorder stopRecord];
+}
+
+- (IBAction)playRecord:(id)sender {
+    [self.recorder playRecord];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
